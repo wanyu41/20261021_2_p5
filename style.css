@@ -1,0 +1,134 @@
+/* 全站色彩模式、字型與基礎顏色。 */
+:root { color-scheme: dark; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #080d16; color: #f4f7fb; } /* 設定深色主題與系統字型。 */
+/* 所有元素統一使用邊框盒模型。 */
+* { box-sizing: border-box; } /* 避免尺寸計算受到內距影響。 */
+/* 設定頁面基本寬度與背景。 */
+html, body { min-width: 320px; min-height: 100%; margin: 0; background: #080d16; } /* 避免頁面預設留白與窄螢幕破版。 */
+/* 設定一般瀏覽時的頁面內距。 */
+body { padding: 24px; } /* 讓介面與瀏覽器視窗邊緣保持距離。 */
+/* 設定主要內容容器寬度與置中方式。 */
+.exam-app { width: min(100%, 1500px); margin: 0 auto; } /* 限制超寬畫面內容寬度。 */
+/* 提供僅供螢幕閱讀器辨識的標題樣式。 */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; } /* 保留語意但不占用畫面空間。 */
+/* 建立頁面上方三個功能分頁列。 */
+.tab-bar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 20px; padding: 7px; border: 1px solid #202b3b; border-radius: 14px; background: #0e1623; } /* 以三欄呈現功能分頁。 */
+/* 設定分頁按鈕的基本外觀。 */
+.tab-button { min-height: 50px; border: 0; border-radius: 9px; background: transparent; color: #aab8ca; font: inherit; font-size: clamp(15px, 2vw, 19px); font-weight: 700; cursor: pointer; } /* 提供大面積、易點選的分頁按鈕。 */
+/* 強調目前選取的分頁。 */
+.tab-button.active { background: #2768b2; color: #fff; box-shadow: 0 4px 16px #0003; } /* 以藍色底色標示目前分頁。 */
+/* 為鍵盤操作提供明確焦點外框。 */
+.tab-button:focus-visible, .primary-button:focus-visible, .secondary-button:focus-visible, .bell-button:focus-visible, .delete-button:focus-visible { outline: 3px solid #a9d2ff; outline-offset: 3px; } /* 強化鍵盤導覽可視性。 */
+/* 隱藏沒有選取的分頁內容。 */
+.tab-page { display: none; } /* 避免非目前頁面干擾操作。 */
+/* 顯示目前選取的分頁內容。 */
+.tab-page.active { display: block; } /* 保留選取分頁的完整版面。 */
+/* 建立考試時鐘的深色漸層畫布外框。 */
+.clock-stage { height: min(52vh, 500px); min-height: 330px; overflow: hidden; border: 1px solid #202b3b; border-radius: 22px; background: radial-gradient(ellipse at 50% 40%, #182438 0%, #101827 54%, #0c1320 100%); box-shadow: 0 18px 55px #0005; } /* 以高對比背景襯托時鐘數字。 */
+/* 讓 p5.js 考試畫布填滿容器。 */
+.clock-stage canvas { display: block; width: 100%; height: 100%; } /* 確保畫布不產生行內空白。 */
+/* 將考試資訊卡排列成四欄。 */
+.exam-details { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 18px 0 28px; } /* 讓投影資訊清楚分區。 */
+/* 設定單張考試資訊卡外觀。 */
+.detail-card { min-width: 0; padding: 18px 20px; border: 1px solid #202b3b; border-radius: 14px; background: #101827; } /* 使用深色卡片承載考試資料。 */
+/* 設定資訊卡的欄位名稱。 */
+.detail-label { margin-bottom: 8px; color: #91a1b7; font-size: 15px; } /* 讓欄位名稱與內容有視覺層次。 */
+/* 設定資訊卡的欄位內容。 */
+.detail-value { overflow-wrap: anywhere; color: #f4f7fb; font-size: clamp(17px, 1.7vw, 23px); font-weight: 650; } /* 提升考試資訊的閱讀辨識度。 */
+/* 設定表單與課表共用控制面板。 */
+.controls-panel { padding: 22px; border: 1px solid #202b3b; border-radius: 18px; background: #0e1623; } /* 以面板區隔設定區域。 */
+/* 設定設定面板標題。 */
+.controls-heading { margin: 0 0 18px; font-size: 20px; } /* 突顯設定區段名稱。 */
+/* 將輸入欄位排列為響應式三欄。 */
+.settings-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } /* 對齊各種表單欄位。 */
+/* 讓每個欄位標籤與輸入框垂直排列。 */
+.field { display: flex; min-width: 0; flex-direction: column; gap: 8px; } /* 確保標籤位置與間距一致。 */
+/* 設定表單欄位標籤文字。 */
+.field label { color: #aab8ca; font-size: 14px; } /* 讓欄位名稱柔和但清晰。 */
+/* 設定文字、時間與數字輸入欄位。 */
+.setting-input { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid #35445a; border-radius: 9px; outline: none; background: #151f2e; color: #f4f7fb; font: inherit; font-size: 17px; } /* 提供較大的觸控與投影操作欄位。 */
+/* 強調目前正在輸入的欄位。 */
+.setting-input:focus { border-color: #80b7ff; box-shadow: 0 0 0 3px #4c9dff30; } /* 提供清楚的輸入焦點效果。 */
+/* 設定按鈕與提示訊息的水平排列。 */
+.form-actions { display: flex; align-items: center; gap: 16px; margin-top: 20px; } /* 將操作按鈕與狀態訊息放在同一列。 */
+/* 設定主要藍色操作按鈕。 */
+.primary-button { min-height: 48px; padding: 0 22px; border: 0; border-radius: 9px; background: #2768b2; color: #fff; font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; } /* 提供開始與全螢幕等主要操作。 */
+/* 設定主要按鈕的滑鼠懸停狀態。 */
+.primary-button:hover:not(:disabled) { background: #347bc9; } /* 使用較亮藍色回饋滑鼠操作。 */
+/* 標示目前不可使用的主要按鈕。 */
+.primary-button:disabled { opacity: .48; cursor: not-allowed; } /* 清楚顯示按鈕停用狀態。 */
+/* 設定次要操作按鈕。 */
+.secondary-button { min-height: 46px; padding: 0 19px; border: 1px solid #35445a; border-radius: 9px; background: #182437; color: #e7edf5; font: inherit; font-size: 16px; font-weight: 650; cursor: pointer; } /* 讓暫停、重設等按鈕保持一致。 */
+/* 設定次要按鈕滑鼠懸停回饋。 */
+.secondary-button:hover:not(:disabled) { background: #23344c; } /* 增加互動狀態的辨識度。 */
+/* 標示目前不可使用的次要按鈕。 */
+.secondary-button:disabled { opacity: .48; cursor: not-allowed; } /* 防止使用者誤以為按鈕仍可操作。 */
+/* 顯示設定錯誤或動作結果。 */
+.form-notice { color: #ff9a9f; font-size: 14px; } /* 使用醒目文字回報錯誤與狀態。 */
+/* 設定各功能頁的標題區。 */
+.page-heading { margin: 6px 0 20px; } /* 與分頁列保持舒適間距。 */
+/* 設定功能頁主標題。 */
+.page-heading h1 { margin: 0 0 8px; font-size: clamp(26px, 4vw, 36px); } /* 讓頁面標題大小隨螢幕調整。 */
+/* 設定功能頁說明文字。 */
+.page-heading p, .helper-text { margin: 0; color: #9baabd; line-height: 1.6; } /* 以柔和顏色呈現輔助說明。 */
+/* 將上課鈴與下課鈴大按鈕並排。 */
+.bell-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 22px 0; } /* 使用雙欄呈現鐘聲操作。 */
+/* 設定兩種鈴聲按鈕的共用外觀。 */
+.bell-button { min-height: clamp(120px, 20vh, 210px); border: 1px solid #ffffff20; border-radius: 20px; color: #fff; font: inherit; font-size: clamp(30px, 5vw, 56px); font-weight: 800; letter-spacing: .08em; cursor: pointer; box-shadow: 0 14px 36px #0004; transition: transform .12s, filter .12s; } /* 製作遠距可見的大型鈴聲按鈕。 */
+/* 上課鈴使用藍綠色系。 */
+.start-bell { background: linear-gradient(135deg, #167b75, #1ba88d); } /* 讓上課鈴容易與下課鈴區分。 */
+/* 下課鈴使用暖橘色系。 */
+.end-bell { background: linear-gradient(135deg, #a9552c, #e47b3f); } /* 讓下課鈴具有另一種視覺辨識。 */
+/* 提供鈴聲按鈕的按壓回饋。 */
+.bell-button:active { transform: scale(.985); filter: brightness(1.15); } /* 讓按鈕觸發時有即時反應。 */
+/* 將自動打鐘標題與開關放在同一列。 */
+.section-title-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; } /* 清楚排列課表自動打鐘控制。 */
+/* 設定自動打鐘開關標籤。 */
+.switch-label { display: flex; align-items: center; gap: 10px; color: #e7edf5; font-size: 16px; cursor: pointer; } /* 讓開關說明文字可點選。 */
+/* 放大原生開關方便觸控操作。 */
+.switch-label input { width: 22px; height: 22px; accent-color: #42c69a; } /* 使用主題色標示啟用狀態。 */
+/* 設定課表說明文字間距。 */
+.helper-text { margin: -6px 0 24px; font-size: 14px; } /* 提示自動播放音訊的瀏覽器限制。 */
+/* 區隔課表標題與上一個區段。 */
+.schedule-heading { margin-top: 24px; } /* 讓課表與自動打鐘控制分明。 */
+/* 設定課表標題列的四欄配置。 */
+.schedule-head, .schedule-row { display: grid; grid-template-columns: minmax(64px, .7fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(64px, .7fr); align-items: center; gap: 12px; } /* 對齊節次、上下課時間與刪除操作。 */
+/* 設定課表欄位名稱文字。 */
+.schedule-head { padding: 0 4px 10px; color: #91a1b7; font-size: 14px; } /* 讓課表欄位名稱較為輕巧。 */
+/* 設定各節課表列外觀。 */
+.schedule-row { margin-bottom: 10px; padding: 10px; border: 1px solid #263449; border-radius: 11px; background: #111b29; } /* 分開顯示各節課表。 */
+/* 設定課表列中的節次標籤。 */
+.schedule-row strong { color: #e7edf5; font-size: 15px; } /* 強調節次編號。 */
+/* 設定課表列中的時間輸入欄位。 */
+.schedule-time { min-width: 0; } /* 避免時間欄位擠壓其他操作。 */
+/* 設定刪除課表節次按鈕。 */
+.delete-button { min-height: 42px; border: 1px solid #74434a; border-radius: 8px; background: #3a2028; color: #ffb3b7; font: inherit; cursor: pointer; } /* 以紅色系標示刪除操作。 */
+/* 設定刪除按鈕的滑鼠懸停樣式。 */
+.delete-button:hover { background: #562832; } /* 提供刪除操作的懸停回饋。 */
+/* 設定空課表提示文字。 */
+.schedule-list.empty { margin: 0; color: #8190a4; font-size: 15px; } /* 說明目前尚無課表內容。 */
+/* 調整課表新增按鈕排列方式。 */
+#bell-page .form-actions { flex-wrap: wrap; } /* 窄螢幕時允許提示文字換行。 */
+/* 設定番茄鐘大型倒數畫布外框。 */
+.pomodoro-stage { height: min(46vh, 420px); min-height: 280px; overflow: hidden; border: 1px solid #202b3b; border-radius: 22px; background: radial-gradient(ellipse at 50% 45%, #1b2c3b, #101827 68%); box-shadow: 0 18px 55px #0005; } /* 讓番茄倒數成為頁面視覺中心。 */
+/* 讓番茄鐘 p5.js 畫布填滿容器。 */
+.pomodoro-canvas { display: block; width: 100%; height: 100%; } /* 確保大字倒數完整顯示。 */
+/* 將番茄鐘階段與輪數分別置於左右兩側。 */
+.pomodoro-meta { display: flex; justify-content: space-between; gap: 14px; margin: 16px 4px 22px; color: #b7c5d5; font-size: clamp(18px, 2.5vw, 24px); font-weight: 700; } /* 讓目前階段和輪數一眼可辨。 */
+/* 將專注與休息設定排列為兩欄。 */
+.pomodoro-settings { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* 保持番茄時間設定簡潔。 */
+/* 將番茄鐘控制按鈕排列並提供間距。 */
+.pomodoro-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; } /* 允許按鈕在窄畫面換行。 */
+/* 設定番茄鐘提示音錯誤訊息間距。 */
+.pomodoro-notice { margin-top: 14px; } /* 在音訊無法啟用時提供可見狀態回報。 */
+/* 全螢幕時隱藏分頁列、其他分頁與考試設定區。 */
+.fullscreen-active .tab-bar, .fullscreen-active .tab-page:not(#exam-page), .fullscreen-active #exam-controls { display: none; } /* 全螢幕只留下時鐘與考試資訊。 */
+/* 全螢幕時讓考試頁填滿畫面並垂直置中。 */
+.fullscreen-active #exam-page { display: flex; min-height: 100vh; flex-direction: column; justify-content: center; } /* 最佳化投影時鐘版面。 */
+/* 全螢幕時擴大考試時鐘區域。 */
+.fullscreen-active .clock-stage { height: min(62vh, 680px); min-height: 300px; } /* 讓時鐘更適合遠距投影。 */
+/* 全螢幕時移除資訊卡區底部多餘空間。 */
+.fullscreen-active .exam-details { margin-bottom: 0; } /* 保持資訊區與時鐘的整體平衡。 */
+/* 中等寬度裝置採用雙欄資訊卡和輸入欄位。 */
+@media (max-width: 760px) { body { padding: 14px; } .clock-stage { height: 42vh; min-height: 260px; } .exam-details { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .detail-card { padding: 14px; } .settings-form { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px; } .controls-panel { padding: 18px 14px; } .fullscreen-active .clock-stage { height: 52vh; } } /* 配合平板與窄螢幕調整版面。 */
+/* 手機螢幕改用單欄設定並縮小分頁間距。 */
+@media (max-width: 480px) { body { padding: 10px; } .tab-bar { gap: 4px; padding: 5px; } .tab-button { min-height: 46px; font-size: 14px; } .bell-buttons { gap: 10px; } .bell-button { min-height: 120px; letter-spacing: 0; } .schedule-head, .schedule-row { grid-template-columns: 52px minmax(74px, 1fr) minmax(74px, 1fr) 54px; gap: 6px; } .schedule-head { font-size: 12px; } .schedule-row { padding: 7px; } .schedule-row strong { font-size: 13px; } .delete-button { min-height: 40px; font-size: 13px; } .settings-form { grid-template-columns: 1fr; } .pomodoro-actions .primary-button, .pomodoro-actions .secondary-button { flex: 1 1 calc(50% - 12px); } } /* 確保手機上的課表與操作按鈕仍可使用。 */
